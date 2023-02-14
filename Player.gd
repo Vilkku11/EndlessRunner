@@ -2,7 +2,7 @@ extends CharacterBody3D
 ##
 ## Simple left/right character controller
 ##
-
+signal collision
 
 const SPEED = 5.0
 
@@ -21,4 +21,5 @@ func _physics_process(_delta: float) -> void:
 	var collision = get_last_slide_collision()
 	if collision:
 		print("Collided with: ", collision.get_collider())
+		emit_signal("collision")
 		#get_tree().quit()

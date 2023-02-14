@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmdm8rnr517pu"]
+[gd_scene load_steps=9 format=3 uid="uid://dmdm8rnr517pu"]
 
+[ext_resource type="Script" path="res://world.gd" id="1_2gu0i"]
 [ext_resource type="Script" path="res://Player.gd" id="1_704f2"]
 [ext_resource type="PackedScene" uid="uid://bt2cu7pw8is6i" path="res://terrain_controller.tscn" id="2_gf1wx"]
 
@@ -21,6 +22,7 @@ glow_enabled = true
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4q8ns"]
 
 [node name="World" type="Node3D"]
+script = ExtResource("1_2gu0i")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_12h2x")
@@ -44,3 +46,6 @@ transform = Transform3D(1, 0, 0, 0, 0.970553, 0.240889, 0, -0.240889, 0.970553, 
 fov = 91.0
 
 [node name="TerrainController" parent="." instance=ExtResource("2_gf1wx")]
+
+[connection signal="game_ended" from="." to="TerrainController" method="_on_world_game_ended"]
+[connection signal="collision" from="Player" to="." method="_on_player_collision"]

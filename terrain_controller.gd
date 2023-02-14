@@ -17,6 +17,7 @@ var terrain_belt: Array[MeshInstance3D] = []
 ## Path to directory holding the terrain block scenes
 @export_dir var terrain_blocks_path = "res://Terrain"
 
+var run = true
 
 func _ready() -> void:
 	_load_terrain_scenes(terrain_blocks_path)
@@ -24,7 +25,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	_progress_terrain(delta)
+	if run:
+		_progress_terrain(delta)
 
 
 func _init_blocks(number_of_blocks: int) -> void:
@@ -62,3 +64,7 @@ func _load_terrain_scenes(target_path: String) -> void:
 	for scene_path in dir.get_files():
 		print("Loading terrian block scene: " + target_path + "/" + scene_path)
 		TerrainBlocks.append(load(target_path + "/" + scene_path))
+
+
+func _on_world_game_ended():
+	run = false
