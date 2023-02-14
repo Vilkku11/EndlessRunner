@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmdm8rnr517pu"]
+[gd_scene load_steps=8 format=3 uid="uid://dmdm8rnr517pu"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_704f2"]
+[ext_resource type="PackedScene" uid="uid://bt2cu7pw8is6i" path="res://terrain_controller.tscn" id="2_gf1wx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cdcmx"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,13 +19,6 @@ glow_enabled = true
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e7mym"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4q8ns"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_hvx2r"]
-size = Vector2(15, 20)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ixuic"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_biiug"]
 
 [node name="World" type="Node3D"]
 
@@ -49,33 +43,4 @@ mesh = SubResource("CapsuleMesh_4q8ns")
 transform = Transform3D(1, 0, 0, 0, 0.970553, 0.240889, 0, -0.240889, 0.970553, 0, 1.50087, 2.01873)
 fov = 91.0
 
-[node name="Terrain0" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.50071)
-mesh = SubResource("PlaneMesh_hvx2r")
-
-[node name="Block0" type="StaticBody3D" parent="Terrain0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain0/Block0"]
-shape = SubResource("BoxShape3D_ixuic")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain0/Block0"]
-mesh = SubResource("BoxMesh_biiug")
-
-[node name="Block1" type="StaticBody3D" parent="Terrain0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.19599, 0.5, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain0/Block1"]
-shape = SubResource("BoxShape3D_ixuic")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain0/Block1"]
-mesh = SubResource("BoxMesh_biiug")
-
-[node name="Block2" type="StaticBody3D" parent="Terrain0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.06622, 0.5, -3.72369)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain0/Block2"]
-shape = SubResource("BoxShape3D_ixuic")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain0/Block2"]
-mesh = SubResource("BoxMesh_biiug")
+[node name="TerrainController" parent="." instance=ExtResource("2_gf1wx")]
