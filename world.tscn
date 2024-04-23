@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmdm8rnr517pu"]
+[gd_scene load_steps=6 format=3 uid="uid://dmdm8rnr517pu"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_2gu0i"]
-[ext_resource type="Script" path="res://Player.gd" id="1_704f2"]
 [ext_resource type="PackedScene" uid="uid://bt2cu7pw8is6i" path="res://terrain_controller.tscn" id="2_gf1wx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cdcmx"]
@@ -17,10 +16,6 @@ sky = SubResource("Sky_aintw")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e7mym"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_4q8ns"]
-
 [node name="World" type="Node3D"]
 script = ExtResource("1_2gu0i")
 
@@ -31,21 +26,10 @@ environment = SubResource("Environment_12h2x")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
-script = ExtResource("1_704f2")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("CapsuleShape3D_e7mym")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-mesh = SubResource("CapsuleMesh_4q8ns")
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.970553, 0.240889, 0, -0.240889, 0.970553, 0, 1.50087, 2.01873)
-fov = 91.0
-
 [node name="TerrainController" parent="." instance=ExtResource("2_gf1wx")]
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.869219, 0.494428, 0, -0.494428, 0.869219, 0, 3.65022, 2.70701)
+fov = 91.0
+
 [connection signal="game_ended" from="." to="TerrainController" method="_on_world_game_ended"]
-[connection signal="collision" from="Player" to="." method="_on_player_collision"]
